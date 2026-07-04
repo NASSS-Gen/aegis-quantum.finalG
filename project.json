@@ -1,0 +1,24 @@
+{
+  "overview": "Aegis Quantum is a trading terminal that generates calibrated, multi-model trading signals with backtested confidence, volume profile analysis, and adaptive regime detection for retail and intraday traders.",
+  "features": [
+    "Multi-model signal generation: mean reversion, momentum, and pairs trading alongside indicator confluence",
+    "Confidence calibration so stated confidence reflects realized historical win rate",
+    "Volume profile analysis with point-of-control, value area, and buy/sell pressure",
+    "Adaptive regime detection that weights strategies by trending, ranging, or volatile markets",
+    "Extended backtesting over 3-5 years with per-model metrics, regime breakdown, and walk-forward validation",
+    "Model comparison view showing all models side-by-side on the same asset and range",
+    "Honest disclaimers that no system guarantees profit",
+    "Apple-inspired black and white minimal theme preserved"
+  ],
+  "category": "productivity",
+  "tags": [
+    "trading",
+    "quant",
+    "signals",
+    "backtesting",
+    "icp",
+    "motoko",
+    "react"
+  ],
+  "last_updated": "2026-07-04T04:03:14.410Z"
+}

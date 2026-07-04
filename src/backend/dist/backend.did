@@ -1,0 +1,631 @@
+type VolumeProfile = 
+ record {
+   avgBinVolume: float64;
+   binCount: nat;
+   bins: vec VolumeBin;
+   buyPressure: float64;
+   hvnNodes: vec VolumeNode;
+   latestClose: float64;
+   lvnNodes: vec VolumeNode;
+   maxPrice: float64;
+   minPrice: float64;
+   nodeClass: NodeClass;
+   poc: float64;
+   pocVolume: float64;
+   pricePosition: PricePosition;
+   sellPressure: float64;
+   totalVolume: float64;
+   vah: float64;
+   val: float64;
+ };
+type VolumeNode = 
+ record {
+   kind: text;
+   price: float64;
+   volume: float64;
+ };
+type VolumeBin = 
+ record {
+   price: float64;
+   volume: float64;
+ };
+type VolatilityRegime = 
+ variant {
+   Extreme;
+   HighVolatility;
+   LowVolatility;
+   Normal;
+ };
+type VolatilityOverlay = 
+ record {
+   atrValue: float64;
+   kellyFraction: float64;
+   maxDrawdownEstimate: float64;
+   recommendedLeverage: float64;
+   regime: VolatilityRegime;
+   regimeLabel: text;
+   riskAdjustedPositionSize: float64;
+ };
+type VWAP = 
+ record {
+   deviation: float64;
+   lowerBand: float64;
+   upperBand: float64;
+   value: float64;
+ };
+type UserSettings = 
+ record {
+   mode: Mode;
+   onboardingComplete: bool;
+ };
+type TransformationOutput = 
+ record {
+   body: blob;
+   headers: vec HttpHeader;
+   status: nat;
+ };
+type TransformationInput = 
+ record {
+   context: blob;
+   response: HttpRequestResult;
+ };
+type TradeStatus = 
+ variant {
+   Loss;
+   Open;
+   Win;
+ };
+type Timestamp = nat;
+type TimeframeVote = 
+ record {
+   bias: text;
+   keyLevel: float64;
+   macdSignal: float64;
+   rsi: float64;
+   strength: nat;
+   timeframe: Timeframe;
+   vwapDev: float64;
+ };
+type Timeframe = 
+ variant {
+   D1;
+   H1;
+   H4;
+   M1;
+   M15;
+   M30;
+   M5;
+   W1;
+ };
+type TechnicalIndicators = 
+ record {
+   atr: ATR;
+   bollinger: BollingerBands;
+   cci: CCI;
+   macd: MACD;
+   rsi: RSI;
+   stochastic: Stochastic;
+   vwap: VWAP;
+ };
+type Stochastic = 
+ record {
+   overbought: bool;
+   oversold: bool;
+   percentD: float64;
+   percentK: float64;
+ };
+type SignalType = 
+ variant {
+   BuyCall;
+   BuyFutures;
+   BuyPut;
+   Hold;
+   Sell;
+ };
+type SignalReportCard = 
+ record {
+   backtest: BacktestMetrics;
+   bias: text;
+   calibratedConfidence: opt CalibratedConfidence;
+   compositeConfidence: nat;
+   confluenceBreakdown: vec TimeframeVote;
+   expectedMovePercent: float64;
+   expectedValue: float64;
+   grade: SignalGrade;
+   honestDisclaimer: text;
+   keyLevels: vec KeyLevel;
+   model: QuantModel;
+   modelSignal: ModelSignal;
+   reasoning: text;
+   recommendedPositionSize: float64;
+   regime: VolatilityRegime;
+   regimeAssessment: opt RegimeAssessment;
+   regimeLabel: text;
+   riskRewardRatio: float64;
+   volumeProfile: opt VolumeProfile;
+ };
+type SignalGrade = 
+ variant {
+   A;
+   B;
+   C;
+   D;
+   F;
+ };
+type Result_1 = 
+ variant {
+   Err: text;
+   Ok: float64;
+ };
+type Result = 
+ variant {
+   Err: text;
+   Ok: vec OHLC;
+ };
+type RegimeStrategyWeights = 
+ record {
+   meanReversion: float64;
+   momentum: float64;
+   pairs: float64;
+   sizeMultiplier: float64;
+ };
+type RegimePerformance = 
+ record {
+   regime: MarketRegime;
+   tradeCount: nat;
+   winRate: float64;
+ };
+type RegimeHistoryEntry = 
+ record {
+   regime: MarketRegime;
+   timestamp: Timestamp;
+ };
+type RegimeAssessment = 
+ record {
+   adx: float64;
+   atrPercentile: float64;
+   confidence: float64;
+   minusDI: float64;
+   plusDI: float64;
+   priceVsEma200: variant {
+                    above;
+                    below;
+                    near;
+                  };
+   reasoning: text;
+   regime: MarketRegime;
+ };
+type RSI = 
+ record {
+   overbought: bool;
+   oversold: bool;
+   value: float64;
+ };
+type QuantSettings = 
+ record {
+   accountSize: float64;
+   backtestLookback: nat;
+   confluenceWeights: ConfluenceWeights;
+   indicatorSet: IndicatorSet;
+   maxRiskPercent: float64;
+   minConfidence: nat;
+   useRegimeFilter: bool;
+   useVWAP: bool;
+ };
+type QuantModel = 
+ variant {
+   auto;
+   meanReversion;
+   momentum;
+   pairs;
+ };
+type PricePosition = 
+ variant {
+   AboveVA;
+   BelowVA;
+   InVA;
+ };
+type PredictionStats = 
+ record {
+   avgPnl: float64;
+   avgRiskReward: float64;
+   bestTrade: float64;
+   gradeDistribution: GradeDistribution;
+   outcomeBreakdown: OutcomeBreakdown;
+   resolvedCount: nat;
+   sharpeLikeRatio: float64;
+   totalPredictions: nat;
+   winRate: float64;
+   worstTrade: float64;
+ };
+type PredictionRecord = 
+ record {
+   assetClass: text;
+   assetId: text;
+   confidence: nat;
+   entryPrice: float64;
+   grade: SignalGrade;
+   id: nat;
+   outcome: opt Outcome;
+   pnl: opt float64;
+   resolvedAt: opt nat;
+   signal: SignalType;
+   stopLoss: float64;
+   targetPrice: float64;
+   timeframe: Timeframe;
+   timestamp: nat;
+ };
+type PredictionFilter = 
+ record {
+   assetId: opt text;
+   endDate: opt nat;
+   grade: opt SignalGrade;
+   outcome: opt Outcome;
+   signalType: opt SignalType;
+   startDate: opt nat;
+   timeframe: opt Timeframe;
+ };
+type PracticeTrade = 
+ record {
+   assetClass: text;
+   assetId: text;
+   createdAt: nat;
+   direction: Direction;
+   entryPrice: float64;
+   id: nat;
+   pnl: opt float64;
+   resolvedAt: opt nat;
+   scope: text;
+   status: TradeStatus;
+   stopLoss: float64;
+   targetPrice: float64;
+   timestamp: nat;
+ };
+type PracticeStats = 
+ record {
+   avgPnl: float64;
+   avgRiskReward: float64;
+   losses: nat;
+   totalPnl: float64;
+   totalTrades: nat;
+   winRate: float64;
+   wins: nat;
+ };
+type OutcomeBreakdown = 
+ record {
+   hitStop: nat;
+   hitTarget: nat;
+   open: nat;
+ };
+type Outcome = 
+ variant {
+   HitStop;
+   HitTarget;
+   Open;
+ };
+type OHLC = 
+ record {
+   close: float64;
+   high: float64;
+   low: float64;
+   open: float64;
+   timestamp: nat;
+   volume: float64;
+ };
+type NodeClass = 
+ variant {
+   HVN;
+   LVN;
+   Other;
+   POC;
+ };
+type ModelSignal = 
+ record {
+   confidence: float64;
+   direction: ModelDirection;
+   entryPrice: float64;
+   metrics: text;
+   model: QuantModel;
+   reasoning: text;
+   stopLoss: float64;
+   takeProfit: float64;
+ };
+type ModelDirection = 
+ variant {
+   long;
+   neutral;
+   short;
+ };
+type ModelComparisonEntry = 
+ record {
+   maxDrawdown: float64;
+   model: QuantModel;
+   outOfSampleWinRate: opt float64;
+   profitFactor: float64;
+   sharpe: float64;
+   totalTrades: nat;
+   winRate: float64;
+ };
+type ModelComparison = 
+ record {
+   assetId: AssetId;
+   dateRange: text;
+   results: vec ModelComparisonEntry;
+   timeframe: Timeframe;
+ };
+type Mode = 
+ variant {
+   Advanced;
+   Beginner;
+   Intermediate;
+   Optional;
+   PowerUser;
+ };
+type MarketRegime = 
+ variant {
+   ranging;
+   trendingDown;
+   trendingUp;
+   volatile;
+ };
+type MACD = 
+ record {
+   histogram: float64;
+   macdLine: float64;
+   signalLine: float64;
+ };
+type KeyLevel = 
+ record {
+   kind: text;
+   name: text;
+   price: float64;
+ };
+type IndicatorSet = 
+ variant {
+   Full;
+   Minimal;
+ };
+type HttpRequestResult = 
+ record {
+   body: blob;
+   headers: vec HttpHeader;
+   status: nat;
+ };
+type HttpHeader = 
+ record {
+   name: text;
+   value: text;
+ };
+type GradeDistribution = 
+ record {
+   gradeA: nat;
+   gradeB: nat;
+   gradeC: nat;
+   gradeD: nat;
+   gradeF: nat;
+ };
+type EquityPoint = 
+ record {
+   drawdown: float64;
+   equity: float64;
+   timestamp: Timestamp;
+ };
+type Direction = 
+ variant {
+   Long;
+   Short;
+ };
+type ConfluenceWeights = 
+ record {
+   d1: nat;
+   h1: nat;
+   h4: nat;
+   higherTimeframe: nat;
+   lowerTimeframe: nat;
+   m15: nat;
+   selectedTimeframe: nat;
+ };
+type ConfluenceResult = 
+ record {
+   confluenceScore: nat;
+   finalBias: text;
+   primaryTimeframe: Timeframe;
+   votes: vec TimeframeVote;
+   weightedScore: float64;
+ };
+type CalibrationTable = 
+ record {
+   buckets: vec CalibrationBucket;
+   disclaimer: text;
+   lastUpdated: Timestamp;
+   totalSamples: nat;
+ };
+type CalibrationBucket = 
+ record {
+   maxConfidence: float64;
+   minConfidence: float64;
+   realizedWinRate: float64;
+   reliabilityFactor: float64;
+   reliabilityGrade: text;
+   sampleCount: nat;
+ };
+type CalibratedConfidence = 
+ record {
+   bucket: CalibrationBucket;
+   calibratedConfidence: float64;
+   isCalibrated: bool;
+   rawConfidence: float64;
+   warning: text;
+ };
+type CCI = 
+ record {
+   overbought: bool;
+   oversold: bool;
+   value: float64;
+ };
+type BollingerBands = 
+ record {
+   lower: float64;
+   middle: float64;
+   percentB: float64;
+   upper: float64;
+ };
+type BacktestTrade = 
+ record {
+   direction: BacktestDirection;
+   entryPrice: float64;
+   entryTimestamp: Timestamp;
+   exitPrice: float64;
+   exitTimestamp: Timestamp;
+   holdingPeriod: nat;
+   pnl: float64;
+   returnPercent: float64;
+ };
+type BacktestSummary = 
+ record {
+   config: BacktestConfig;
+   id: nat;
+   metrics: BacktestMetricsExtended;
+   runAt: Timestamp;
+   runLabel: opt text;
+   status: BacktestStatus;
+   tradeCount: nat;
+ };
+type BacktestStatus = 
+ variant {
+   Completed;
+   Failed;
+   Partial;
+ };
+type BacktestResult = 
+ record {
+   config: BacktestConfig;
+   equityCurve: vec EquityPoint;
+   metrics: BacktestMetricsExtended;
+   runAt: Timestamp;
+   trades: vec BacktestTrade;
+ };
+type BacktestMetricsExtended = 
+ record {
+   averageLoss: float64;
+   averageWin: float64;
+   calibrationTable: opt CalibrationTable;
+   inSampleWinRate: opt float64;
+   maxDrawdown: float64;
+   model: QuantModel;
+   numberOfTrades: nat;
+   outOfSampleWinRate: opt float64;
+   profitFactor: float64;
+   regimeBreakdown: opt vec RegimePerformance;
+   sharpeRatio: float64;
+   sortinoRatio: float64;
+   totalReturn: float64;
+   winRate: float64;
+ };
+type BacktestMetrics = 
+ record {
+   avgReturn: float64;
+   lookbackCandles: nat;
+   maxDrawdown: float64;
+   sharpeRatio: float64;
+   winRate: float64;
+ };
+type BacktestDirection = 
+ variant {
+   Long;
+   Short;
+ };
+type BacktestConfig = 
+ record {
+   assetClass: AssetClass;
+   assetId: AssetId;
+   endDate: Timestamp;
+   includeRegimeBreakdown: bool;
+   initialCapital: float64;
+   model: QuantModel;
+   pairsAssetId: opt AssetId;
+   runLabel: opt text;
+   startDate: Timestamp;
+   strategyParams: QuantSettings;
+   timeframe: Timeframe;
+   walkForwardSplit: float64;
+ };
+type AssetId = text;
+type AssetClass = text;
+type ATR = record {value: float64;};
+service : {
+  addPracticeTrade: (assetId: text, assetClass: text, scope: text, direction:
+   Direction, entryPrice: float64, targetPrice: float64, stopLoss:
+   float64) -> (PracticeTrade);
+  addPredictionRecord: ("record": PredictionRecord) -> (nat);
+  adjustConfidenceForVolume: (confidence: float64, signalDirection: text,
+   volumeProfile: VolumeProfile) -> (float64) query;
+  calibrateConfidence: (rawConfidence: float64, assetClass: opt text,
+   timeframe: opt Timeframe) -> (CalibratedConfidence) query;
+  computeVolumeProfile: (assetId: text, scope: text, binCount: nat) ->
+   (VolumeProfile);
+  detectRegime: (assetId: text, scope: text) -> (RegimeAssessment);
+  generateMeanReversionSignal: (ohlc: vec OHLC, settings: QuantSettings) ->
+   (ModelSignal);
+  generateModelSignal: (model: QuantModel, ohlcA: vec OHLC, ohlcB:
+   opt vec OHLC, settings: QuantSettings) -> (ModelSignal);
+  generateMomentumSignal: (ohlc: vec OHLC, settings: QuantSettings) ->
+   (ModelSignal);
+  generatePairsSignal: (ohlcA: vec OHLC, ohlcB: vec OHLC, settings:
+   QuantSettings) -> (ModelSignal);
+  getBacktestHistory: () -> (vec BacktestSummary) query;
+  getBacktestResult: (id: nat) -> (opt BacktestResult) query;
+  getCalibrationTable: (assetClass: opt text, timeframe: opt Timeframe) ->
+   (CalibrationTable) query;
+  getConfluenceResult: (assetId: text, selectedTimeframe: Timeframe, scope:
+   text) -> (ConfluenceResult);
+  getCryptoOHLC: (coinId: text, days: nat) -> (Result);
+  getCryptoPrice: (coinId: text) -> (Result_1);
+  getFilteredPredictionHistory: (filter: PredictionFilter) ->
+   (vec PredictionRecord) query;
+  getForexOHLC: (baseCurrency: text, quoteCurrency: text, days: nat) ->
+   (Result);
+  getForexPrice: (baseCurrency: text, quoteCurrency: text) -> (Result_1);
+  getIndianStockOHLC: (symbol: text, range: text) -> (Result);
+  getPracticeTradeHistory: () -> (vec PracticeTrade) query;
+  getPracticeTradeStats: () -> (PracticeStats) query;
+  getPredictionHistory: () -> (vec PredictionRecord) query;
+  getPredictionStats: () -> (PredictionStats) query;
+  getQuantSettings: () -> (QuantSettings) query;
+  getRegimeHistory: (assetId: text, scope: text, lookback: nat) ->
+   (vec RegimeHistoryEntry);
+  getRegimeStrategyWeights: (regime: MarketRegime) ->
+   (RegimeStrategyWeights) query;
+  getSignalReportCard: (assetId: text, timeframe: Timeframe, scope: text,
+   accountSize: float64, maxRiskPercent: float64, model: opt QuantModel) ->
+   (SignalReportCard);
+  getTechnicalIndicators: (assetId: text, timeframe: Timeframe, scope:
+   text) -> (TechnicalIndicators);
+  getUserSettings: () -> (UserSettings) query;
+  getVolatilityOverlay: (assetId: text, timeframe: Timeframe, scope: 
+   text, accountSize: float64, maxRiskPercent: float64) ->
+   (VolatilityOverlay);
+  getVolumeProfile: (assetId: text, scope: text) -> (VolumeProfile);
+  manualResolvePredictionOutcome: (id: nat, outcome: Outcome, pnl:
+   float64) -> (bool);
+  resolvePracticeTradeFromPrice: (id: nat, currentPrice: float64) ->
+   (opt PracticeTrade);
+  resolvePredictionFromPrice: (id: nat, scope: text) ->
+   (opt record {
+          nat;
+          Outcome;
+          float64;
+        });
+  resolvePredictionOutcome: (id: nat, outcome: Outcome, pnl: float64) -> ();
+  runBacktest: (config: BacktestConfig) -> (BacktestResult);
+  runModelComparison: (assetId: AssetId, assetClass: AssetClass,
+   pairsAssetId: opt AssetId, timeframe: Timeframe, startDate: Timestamp,
+   endDate: Timestamp, initialCapital: float64, strategyParams:
+   QuantSettings) -> (ModelComparison);
+  selectBestModel: (assetId: AssetId, timeframe: Timeframe) ->
+   (QuantModel) query;
+  setMode: (mode: Mode) -> ();
+  setOnboardingComplete: () -> ();
+  setQuantSettings: (settings: QuantSettings) -> ();
+  transform: (input: TransformationInput) -> (TransformationOutput) query;
+}

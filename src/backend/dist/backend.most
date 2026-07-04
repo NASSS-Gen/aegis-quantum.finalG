@@ -1,0 +1,241 @@
+// Version: 3.0.0
+type AssetClass__104098425 = Text;
+type AssetId__131908388 = Text;
+type BacktestConfig__25485759 =
+  {
+    assetClass : AssetClass__104098425;
+    assetId : AssetId__131908388;
+    endDate : Timestamp__301639476;
+    includeRegimeBreakdown : Bool;
+    initialCapital : Float;
+    model : QuantModel__318286157;
+    pairsAssetId : ?AssetId__131908388;
+    runLabel : ?Text;
+    startDate : Timestamp__301639476;
+    strategyParams : QuantSettings__41737518;
+    timeframe : Timeframe__1028336653;
+    walkForwardSplit : Float
+  };
+type BacktestDirection__1039653499 = {#Long; #Short};
+type BacktestMetricsExtended__782974745 =
+  {
+    averageLoss : Float;
+    averageWin : Float;
+    calibrationTable : ?CalibrationTable__45656670;
+    inSampleWinRate : ?Float;
+    maxDrawdown : Float;
+    model : QuantModel__318286157;
+    numberOfTrades : Nat;
+    outOfSampleWinRate : ?Float;
+    profitFactor : Float;
+    regimeBreakdown : ?[RegimePerformance__797070865];
+    sharpeRatio : Float;
+    sortinoRatio : Float;
+    totalReturn : Float;
+    winRate : Float
+  };
+type BacktestResult__102477025 =
+  {
+    config : BacktestConfig__25485759;
+    equityCurve : [EquityPoint__974536982];
+    metrics : BacktestMetricsExtended__782974745;
+    runAt : Timestamp__301639476;
+    trades : [BacktestTrade__372316465]
+  };
+type BacktestTrade__372316465 =
+  {
+    direction : BacktestDirection__1039653499;
+    entryPrice : Float;
+    entryTimestamp : Timestamp__301639476;
+    exitPrice : Float;
+    exitTimestamp : Timestamp__301639476;
+    holdingPeriod : Nat;
+    pnl : Float;
+    returnPercent : Float
+  };
+type CacheEntry__87187070 = {cachedAt : Nat; value : Text};
+type CalibrationBucket__807995126 =
+  {
+    maxConfidence : Float;
+    minConfidence : Float;
+    realizedWinRate : Float;
+    reliabilityFactor : Float;
+    reliabilityGrade : Text;
+    sampleCount : Nat
+  };
+type CalibrationTable__45656670 =
+  {
+    buckets : [CalibrationBucket__807995126];
+    disclaimer : Text;
+    lastUpdated : Timestamp__301639476;
+    totalSamples : Nat
+  };
+type ConfluenceWeights__552052670 =
+  {
+    d1 : Nat;
+    h1 : Nat;
+    h4 : Nat;
+    higherTimeframe : Nat;
+    lowerTimeframe : Nat;
+    m15 : Nat;
+    selectedTimeframe : Nat
+  };
+type Data__552063367<K, V> = {var count : Nat__93962160; kvs : [var ?(K, V)]};
+type Direction__871486940 = {#Long; #Short};
+type EquityPoint__974536982 =
+  {drawdown : Float; equity : Float; timestamp : Timestamp__301639476};
+type IndicatorSet__500364506 = {#Full; #Minimal};
+type Internal__455405067<K, V> =
+  {children : [var ?Node__279997185<K, V>]; data : Data__552063367<K, V>};
+type Leaf__114713147<K, V> = {data : Data__552063367<K, V>};
+type Map__190625089<K, V> = Map__719753394<K, V>;
+type Map__246123559<K, V> = Map__190625089<K, V>;
+type Map__719753394<K, V> =
+  {var root : Node__279997185<K, V>; var size : Nat__93962160};
+type MarketDataCache__758200478 =
+  {
+    var ohlcEntries : [(Text, CacheEntry__87187070)];
+    var priceEntries : [(Text, CacheEntry__87187070)]
+  };
+type MarketRegime__316740233 =
+  {#ranging; #trendingDown; #trendingUp; #volatile};
+type MarketRegime__92551589 = MarketRegime__316740233;
+type Mode__386958133 =
+  {#Advanced; #Beginner; #Intermediate; #Optional; #PowerUser};
+type Nat__920180692 = Nat;
+type Nat__93962160 = Nat__920180692;
+type Node__279997185<K, V> =
+  {#internal : Internal__455405067<K, V>; #leaf : Leaf__114713147<K, V>};
+type OldBacktestConfig__88185075 =
+  {
+    assetClass : AssetClass__104098425;
+    assetId : AssetId__131908388;
+    endDate : Timestamp__301639476;
+    initialCapital : Float;
+    runLabel : ?Text;
+    startDate : Timestamp__301639476;
+    strategyParams : QuantSettings__41737518;
+    timeframe : Timeframe__1028336653
+  };
+type OldBacktestMetricsExtended__263601570 =
+  {
+    averageLoss : Float;
+    averageWin : Float;
+    maxDrawdown : Float;
+    numberOfTrades : Nat;
+    profitFactor : Float;
+    sharpeRatio : Float;
+    sortinoRatio : Float;
+    totalReturn : Float;
+    winRate : Float
+  };
+type OldBacktestResult__993605424 =
+  {
+    config : OldBacktestConfig__88185075;
+    equityCurve : [EquityPoint__974536982];
+    metrics : OldBacktestMetricsExtended__263601570;
+    runAt : Timestamp__301639476;
+    trades : [BacktestTrade__372316465]
+  };
+type OldBacktestStore__90183439 =
+  {var nextId : Nat; var results : [(Nat, OldBacktestResult__993605424)]};
+type Outcome__229770958 = {#HitStop; #HitTarget; #Open};
+type PracticeStore__820508914 =
+  {var nextId : Nat; var records : [PracticeTrade__615071657]};
+type PracticeTrade__615071657 =
+  {
+    assetClass : Text;
+    assetId : Text;
+    createdAt : Nat;
+    direction : Direction__871486940;
+    entryPrice : Float;
+    id : Nat;
+    pnl : ?Float;
+    resolvedAt : ?Nat;
+    scope : Text;
+    status : TradeStatus__727385780;
+    stopLoss : Float;
+    targetPrice : Float;
+    timestamp : Nat
+  };
+type PredictionRecord__741961000 =
+  {
+    assetClass : Text;
+    assetId : Text;
+    confidence : Nat;
+    entryPrice : Float;
+    grade : SignalGrade__654315585;
+    id : Nat;
+    outcome : ?Outcome__229770958;
+    pnl : ?Float;
+    resolvedAt : ?Nat;
+    signal : SignalType__350105691;
+    stopLoss : Float;
+    targetPrice : Float;
+    timeframe : Timeframe__246707518;
+    timestamp : Nat
+  };
+type PredictionStore__993121923 =
+  {var nextId : Nat; var records : [PredictionRecord__741961000]};
+type QuantModel__318286157 = QuantModel__324135771;
+type QuantModel__324135771 = {#auto; #meanReversion; #momentum; #pairs};
+type QuantSettings__41737518 =
+  {
+    accountSize : Float;
+    backtestLookback : Nat;
+    confluenceWeights : ConfluenceWeights__552052670;
+    indicatorSet : IndicatorSet__500364506;
+    maxRiskPercent : Float;
+    minConfidence : Nat;
+    useRegimeFilter : Bool;
+    useVWAP : Bool
+  };
+type QuantStore__1071353948 =
+  Map__246123559<Principal, QuantSettings__41737518>;
+type RegimePerformance__797070865 =
+  {regime : MarketRegime__92551589; tradeCount : Nat; winRate : Float};
+type SettingsStore__78041452 =
+  Map__246123559<Principal, UserSettings__451559232>;
+type SignalGrade__654315585 = {#A; #B; #C; #D; #F};
+type SignalType__350105691 = {#BuyCall; #BuyFutures; #BuyPut; #Hold; #Sell};
+type Timeframe__1028336653 = {#D1; #H1; #H4; #M1; #M15; #M30; #M5; #W1};
+type Timeframe__246707518 = Timeframe__1028336653;
+type Timestamp__301639476 = Nat;
+type TradeStatus__727385780 = {#Loss; #Open; #Win};
+type UserSettings__451559232 =
+  {mode : Mode__386958133; onboardingComplete : Bool};
+actor ({
+  in backtestStore : OldBacktestStore__90183439;
+  in marketDataCache : MarketDataCache__758200478;
+  in practiceStore : PracticeStore__820508914;
+  in predictionStore : PredictionStore__993121923;
+  in quantStore : QuantStore__1071353948;
+  in settingsStore : SettingsStore__78041452
+}, {
+  stable var backtestStore :
+    {var nextId : Nat; var results : [(Nat, BacktestResult__102477025)]};
+  stable var calibrationStore :
+    {
+      var cache : [(Text, CalibrationTable__45656670)];
+      var timestamps : [(Text, Nat)]
+    };
+  stable var marketDataCache :
+    {
+      var ohlcEntries : [(Text, CacheEntry__87187070)];
+      var priceEntries : [(Text, CacheEntry__87187070)]
+    };
+  stable var practiceStore :
+    {var nextId : Nat; var records : [PracticeTrade__615071657]};
+  stable var predictionStore :
+    {var nextId : Nat; var records : [PredictionRecord__741961000]};
+  stable var quantStore :
+    {
+      var root : Node__279997185<Principal, QuantSettings__41737518>;
+      var size : Nat__93962160
+    };
+  stable var settingsStore :
+    {
+      var root : Node__279997185<Principal, UserSettings__451559232>;
+      var size : Nat__93962160
+    }
+});

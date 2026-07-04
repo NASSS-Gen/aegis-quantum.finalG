@@ -1,0 +1,384 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+      system-ui, sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui,
+      "Segoe UI", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Menlo", "Monaco", "Cascadia Mono",
+      "Roboto Mono", monospace;
+    --radius: 1rem;
+
+    /* === Monochrome Apple-inspired palette (no color anywhere) === */
+    --background: 1 0 0;
+    --foreground: 0.21 0 0;
+    --card: 0.99 0 0;
+    --card-foreground: 0.21 0 0;
+    --popover: 1 0 0;
+    --popover-foreground: 0.21 0 0;
+
+    --primary: 0.21 0 0;
+    --primary-foreground: 1 0 0;
+
+    --secondary: 0.96 0 0;
+    --secondary-foreground: 0.21 0 0;
+    --muted: 0.96 0 0;
+    --muted-foreground: 0.55 0 0;
+
+    --accent: 0.93 0 0;
+    --accent-foreground: 0.21 0 0;
+
+    --destructive: 0.4 0 0;
+    --destructive-foreground: 1 0 0;
+
+    --success: 0.21 0 0;
+    --success-foreground: 1 0 0;
+
+    --warning: 0.45 0 0;
+    --warning-foreground: 1 0 0;
+
+    --border: 0.9 0 0;
+    --input: 0.9 0 0;
+    --ring: 0.21 0 0;
+
+    /* === 5 greyscale steps for surfaces & borders === */
+    --surface-1: 1 0 0; /* base canvas */
+    --surface-2: 0.99 0 0; /* card */
+    --surface-3: 0.96 0 0; /* muted / secondary */
+    --surface-4: 0.93 0 0; /* accent / hover */
+    --surface-5: 0.9 0 0; /* border / divider */
+
+    /* === Charts: monochrome only === */
+    --chart-1: 0.21 0 0;
+    --chart-2: 0.45 0 0;
+    --chart-3: 0.6 0 0;
+    --chart-4: 0.75 0 0;
+    --chart-5: 0.9 0 0;
+    --chart-grid: 0.93 0 0;
+    --chart-axis: 0.55 0 0;
+    --chart-baseline: 0.45 0 0;
+    --chart-area: 0.21 0 0;
+    --chart-drawdown: 0.75 0 0;
+
+    --metric-positive: 0.21 0 0;
+    --metric-negative: 0.45 0 0;
+    --metric-neutral: 0.55 0 0;
+    --table-stripe: 0.97 0 0;
+    --table-row-hover: 0.96 0 0;
+    --config-input-bg: 1 0 0;
+    --config-label: 0.45 0 0;
+    --config-focus: 0.21 0 0;
+
+    --sidebar: 0.99 0 0;
+    --sidebar-foreground: 0.21 0 0;
+    --sidebar-primary: 0.21 0 0;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.96 0 0;
+    --sidebar-accent-foreground: 0.21 0 0;
+    --sidebar-border: 0.9 0 0;
+    --sidebar-ring: 0.21 0 0;
+
+    /* === Practice Arena tokens (monochrome) === */
+    --practice-accent: 0.21 0 0;
+    --practice-accent-foreground: 1 0 0;
+
+    --long: 0.21 0 0;
+    --long-foreground: 1 0 0;
+    --short: 0.45 0 0;
+    --short-foreground: 1 0 0;
+
+    --marker-entry: 0.21 0 0;
+    --marker-target: 0.45 0 0;
+    --marker-stop: 0.6 0 0;
+
+    --badge-win: 0.21 0 0;
+    --badge-win-foreground: 1 0 0;
+    --badge-loss: 0.45 0 0;
+    --badge-loss-foreground: 1 0 0;
+    --badge-open: 0.96 0 0;
+    --badge-open-foreground: 0.21 0 0;
+    --badge-pending: 0.93 0 0;
+    --badge-pending-foreground: 0.21 0 0;
+
+    --disclaimer-bg: 0.96 0 0;
+    --disclaimer-border: 0.9 0 0;
+    --disclaimer-foreground: 0.45 0 0;
+
+    --shadow-subtle: 0 1px 2px 0 oklch(0.21 0 0 / 0.04), 0 1px 3px 0
+      oklch(0.21 0 0 / 0.06);
+    --shadow-elevated: 0 4px 12px -2px oklch(0.21 0 0 / 0.08), 0 2px 6px -1px
+      oklch(0.21 0 0 / 0.04);
+    --shadow-card: 0 1px 3px 0 oklch(0.21 0 0 / 0.05), 0 1px 2px -1px
+      oklch(0.21 0 0 / 0.04);
+    --shadow-focus: 0 0 0 4px oklch(0.21 0 0 / 0.08);
+  }
+
+  .dark {
+    --background: 1 0 0;
+    --foreground: 0.21 0 0;
+    --card: 0.99 0 0;
+    --card-foreground: 0.21 0 0;
+    --popover: 1 0 0;
+    --popover-foreground: 0.21 0 0;
+
+    --primary: 0.21 0 0;
+    --primary-foreground: 1 0 0;
+
+    --secondary: 0.96 0 0;
+    --secondary-foreground: 0.21 0 0;
+    --muted: 0.96 0 0;
+    --muted-foreground: 0.55 0 0;
+
+    --accent: 0.93 0 0;
+    --accent-foreground: 0.21 0 0;
+
+    --destructive: 0.4 0 0;
+    --destructive-foreground: 1 0 0;
+
+    --success: 0.21 0 0;
+    --success-foreground: 1 0 0;
+
+    --warning: 0.45 0 0;
+    --warning-foreground: 1 0 0;
+
+    --border: 0.9 0 0;
+    --input: 0.9 0 0;
+    --ring: 0.21 0 0;
+
+    --surface-1: 1 0 0;
+    --surface-2: 0.99 0 0;
+    --surface-3: 0.96 0 0;
+    --surface-4: 0.93 0 0;
+    --surface-5: 0.9 0 0;
+
+    --chart-1: 0.21 0 0;
+    --chart-2: 0.45 0 0;
+    --chart-3: 0.6 0 0;
+    --chart-4: 0.75 0 0;
+    --chart-5: 0.9 0 0;
+    --chart-grid: 0.93 0 0;
+    --chart-axis: 0.55 0 0;
+    --chart-baseline: 0.45 0 0;
+    --chart-area: 0.21 0 0;
+    --chart-drawdown: 0.75 0 0;
+
+    --metric-positive: 0.21 0 0;
+    --metric-negative: 0.45 0 0;
+    --metric-neutral: 0.55 0 0;
+    --table-stripe: 0.97 0 0;
+    --table-row-hover: 0.96 0 0;
+    --config-input-bg: 1 0 0;
+    --config-label: 0.45 0 0;
+    --config-focus: 0.21 0 0;
+
+    --sidebar: 0.99 0 0;
+    --sidebar-foreground: 0.21 0 0;
+    --sidebar-primary: 0.21 0 0;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.96 0 0;
+    --sidebar-accent-foreground: 0.21 0 0;
+    --sidebar-border: 0.9 0 0;
+    --sidebar-ring: 0.21 0 0;
+
+    --practice-accent: 0.21 0 0;
+    --practice-accent-foreground: 1 0 0;
+
+    --long: 0.21 0 0;
+    --long-foreground: 1 0 0;
+    --short: 0.45 0 0;
+    --short-foreground: 1 0 0;
+
+    --marker-entry: 0.21 0 0;
+    --marker-target: 0.45 0 0;
+    --marker-stop: 0.6 0 0;
+
+    --badge-win: 0.21 0 0;
+    --badge-win-foreground: 1 0 0;
+    --badge-loss: 0.45 0 0;
+    --badge-loss-foreground: 1 0 0;
+    --badge-open: 0.96 0 0;
+    --badge-open-foreground: 0.21 0 0;
+    --badge-pending: 0.93 0 0;
+    --badge-pending-foreground: 0.21 0 0;
+
+    --disclaimer-bg: 0.96 0 0;
+    --disclaimer-border: 0.9 0 0;
+    --disclaimer-foreground: 0.45 0 0;
+
+    --shadow-subtle: 0 1px 2px 0 oklch(0.21 0 0 / 0.04), 0 1px 3px 0
+      oklch(0.21 0 0 / 0.06);
+    --shadow-elevated: 0 4px 12px -2px oklch(0.21 0 0 / 0.08), 0 2px 6px -1px
+      oklch(0.21 0 0 / 0.04);
+    --shadow-card: 0 1px 3px 0 oklch(0.21 0 0 / 0.05), 0 1px 2px -1px
+      oklch(0.21 0 0 / 0.04);
+    --shadow-focus: 0 0 0 4px oklch(0.21 0 0 / 0.08);
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-feature-settings: "ss01", "cv01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
+  }
+}
+
+@layer utilities {
+  /* Subtle elevation shadow for cards & panels */
+  .shadow-subtle {
+    box-shadow: var(--shadow-subtle);
+  }
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  .shadow-focus {
+    box-shadow: var(--shadow-focus);
+  }
+
+  /* Apple-style label: medium-weight, slightly tracked */
+  .label-apple {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    color: oklch(var(--muted-foreground));
+  }
+
+  /* Data value hero text */
+  .text-hero {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  /* Smooth Apple-style transition */
+  .transition-smooth {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* === Backtesting / chart utilities (monochrome) === */
+
+  /* Equity curve chart grid background (greyscale) */
+  .equity-curve-grid {
+    background-image: linear-gradient(
+        to right,
+        oklch(var(--chart-grid) / 0.6) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        oklch(var(--chart-grid) / 0.6) 1px,
+        transparent 1px
+      );
+    background-size: 40px 32px;
+  }
+
+  /* Equity curve area fill (greyscale) */
+  .chart-area-fill {
+    background: linear-gradient(
+      to bottom,
+      oklch(var(--chart-area) / 0.18) 0%,
+      oklch(var(--chart-area) / 0.05) 60%,
+      oklch(var(--chart-area) / 0) 100%
+    );
+  }
+
+  /* Drawdown zone tint (greyscale) */
+  .drawdown-zone {
+    background: linear-gradient(
+      to bottom,
+      oklch(var(--chart-drawdown) / 0.22) 0%,
+      oklch(var(--chart-drawdown) / 0.06) 100%
+    );
+  }
+
+  /* Chart axis / label text */
+  .chart-axis-text {
+    color: oklch(var(--chart-axis));
+    font-size: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Trade log row — subtle stripe + hover */
+  .trade-log-row {
+    transition: background 0.15s ease-out;
+  }
+  .trade-log-row:nth-child(even) {
+    background: oklch(var(--table-stripe));
+  }
+  .trade-log-row:hover {
+    background: oklch(var(--table-row-hover));
+  }
+
+  /* Metric card — soft elevation + 1px border */
+  .metric-card {
+    border: 1px solid oklch(var(--border));
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+  }
+  .metric-card:hover {
+    border-color: oklch(var(--foreground) / 0.2);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* Metric value color modifiers (monochrome: weight encodes sign) */
+  .metric-value-positive {
+    color: oklch(var(--metric-positive));
+    font-weight: 600;
+  }
+  .metric-value-negative {
+    color: oklch(var(--metric-negative));
+    font-weight: 500;
+  }
+  .metric-value-neutral {
+    color: oklch(var(--metric-neutral));
+    font-weight: 500;
+  }
+
+  /* Config form panel — soft elevation */
+  .config-panel {
+    border: 1px solid oklch(var(--border));
+    box-shadow: var(--shadow-subtle);
+  }
+
+  /* Config form input */
+  .config-input {
+    background: oklch(var(--config-input-bg));
+    border: 1px solid oklch(var(--border));
+    color: oklch(var(--foreground));
+    transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+  }
+  .config-input:focus {
+    outline: none;
+    border-color: oklch(var(--config-focus));
+    box-shadow: var(--shadow-focus);
+  }
+
+  /* Config form label */
+  .config-label {
+    color: oklch(var(--config-label));
+    letter-spacing: -0.005em;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* Volatile regime fill — diagonal hatch using only greyscale tokens */
+  .regime-volatile-fill {
+    background-image: repeating-linear-gradient(
+      45deg,
+      oklch(var(--foreground)) 0,
+      oklch(var(--foreground)) 2px,
+      oklch(var(--surface-2)) 2px,
+      oklch(var(--surface-2)) 4px
+    );
+  }
+}
